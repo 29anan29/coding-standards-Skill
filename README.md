@@ -23,11 +23,12 @@ The skill source lives at
 
 ## Install with the CLI (recommended)
 
-The companion npm package `coding-standards-cli` copies the skill into your AI
-assistant’s skill directory:
+The companion npm package `@29anan29/coding-standards-cli` (published to **both**
+npm and GitHub Packages) copies the skill into your AI assistant’s skill
+directory:
 
 ```bash
-npm install -g coding-standards-cli
+npm install -g @29anan29/coding-standards-cli
 cd /path/to/your/project
 standards init claude      # Claude Code
 standards init opencode    # OpenCode
@@ -46,10 +47,12 @@ option, and the `list`/`uninstall`/`update` commands.
 > `.agents/skills/` — `standards init agents` covers the portable
 > standard shared by many tools.
 
-**GitHub Packages**: also published for this repository at
-`@29anan29/coding-standards-cli` (see the
-[Package registry](https://github.com/users/29anan29/packages?repo_name=coding-standards-Skill));
-installing from it requires a GitHub token with `read:packages`.
+**Where it’s published**:
+- **npm** (registry.npmjs.org): `@29anan29/coding-standards-cli` — installs with no
+  extra config or token.
+- **GitHub Packages**: same package at this repository’s
+  [Package registry](https://github.com/users/29anan29/packages?repo_name=coding-standards-Skill);
+  installing from it requires a GitHub token with `read:packages`.
 
 Cross-platform note: `standards global <tool>` (or `standards init <tool>
 --global`) installs into your user skill directory, resolved per platform

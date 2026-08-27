@@ -16,10 +16,11 @@
 
 ## 使用 CLI 安装（推荐）
 
-配套 npm 包 `coding-standards-cli` 会把技能复制到你的 AI 助手的技能目录：
+配套 npm 包 `@29anan29/coding-standards-cli`（同时发布到 **npm 与 GitHub Packages**）
+会把技能复制到你的 AI 助手的技能目录：
 
 ```bash
-npm install -g coding-standards-cli
+npm install -g @29anan29/coding-standards-cli
 cd /path/to/your/project
 standards init claude      # Claude Code
 standards init opencode    # OpenCode

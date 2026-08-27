@@ -1,6 +1,6 @@
 {
   "name": "coding-standards-cli",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Install the cross-language engineering coding-standards AI skill into Claude Code, OpenCode, Codex CLI, Cursor, Windsurf, Trae, Continue, Gemini CLI, or the .agents standard.",
   "license": "MIT",
   "type": "commonjs",
