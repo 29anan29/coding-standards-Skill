@@ -79,7 +79,7 @@ covering all 17 languages.
 │   └── skill/
 │       └── coding-standards/    # the actual skill
 │           ├── SKILL.md
-│           ├── data/            # .editorconfig, clang-format, rustfmt.toml
+│           ├── data/            # .editorconfig, clang-format, rustfmt.toml, languages/
 │           └── scripts/         # apply-format.sh
 ├── LICENSE
 └── README.md

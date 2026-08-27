@@ -57,7 +57,7 @@ Copied under the tool’s skill directory as `coding-standards/`:
 ```
 coding-standards/
 ├── SKILL.md    # the skill instructions (trigger conditions + standard)
-├── data/       # .editorconfig, clang-format, rustfmt.toml
+├── data/       # .editorconfig, clang-format, rustfmt.toml, languages/
 └── scripts/    # apply-format.sh (per-language formatter wrapper)
 ```
 

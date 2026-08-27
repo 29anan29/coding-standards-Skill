@@ -360,28 +360,29 @@ Check every item before delivering code:
 
 ## Language Conventions
 
-The table below is the authoritative per-language quick reference. Official
-formatters/guides win on detail; this column captures the idiomatic defaults.
+This section is a **compact index**. Before writing or reviewing a specific
+language, read its dedicated file under `data/languages/<lang>.md` and apply the
+recommendations there — official formatters/guides still win on detail.
 
-| Language | Formatter | Indent | Naming | Error handling | Concurrency | Feature gate |
-|----------|-----------|--------|--------|----------------|-------------|--------------|
-| **C** | `clang-format` (+ `indent -kr -i8`) | Tabs (8) | `snake_case`; global symbols descriptive | return codes / `NULL` / `ERR_PTR`; `goto` cleanup | mutex/atomics, manual lifetime | `#ifdef` / `IS_ENABLED` |
-| **C++** | `clang-format` | 2–4 spaces (per project) | `snake_case` vars/funcs, `PascalCase` types, `SCREAMING_SNAKE_CASE` consts | exceptions or typed `Result`; RAII/smart pointers | `std::thread`/`std::mutex`/`std::atomic` | `#ifdef` / `constexpr` |
-| **Rust** | `rustfmt` | 4 spaces | `snake_case` / `CamelCase` / `SCREAMING_SNAKE_CASE` | `Result<T,E>` + `?`, `Option`; no `unwrap` in prod | `Arc`, `Mutex`, channels | Cargo features + `cfg` |
-| **Go** | `gofmt` | Tabs (8 display) | `camelCase` unexported / `CamelCase` exported | `(T, error)`, explicit `err != nil` | goroutines, channels, `sync` | build tags |
-| **Java** | `google-java-format` / Spotless | 4 spaces | `camelCase` methods/vars, `PascalCase` classes, `SCREAMING_SNAKE_CASE` consts | checked/unchecked exceptions, `Optional` | `java.util.concurrent` | build config / annotations |
-| **Kotlin** | `ktlint` | 4 spaces | `camelCase`, `PascalCase` types, `SCREAMING_SNAKE_CASE` consts | exceptions / sealed classes / `Result` | coroutines | Gradle + build config |
-| **JavaScript** | `prettier` | 2 spaces | `camelCase`, `PascalCase` classes, `const` preferred | exceptions; `async`/`await`; no bare `catch` | `async`/`await`, Workers | env flags / bundler |
-| **TypeScript** | `prettier` | 2 spaces | `camelCase`, `PascalCase` interfaces/types | typed errors / discriminated unions; no `any` | `async`/`await`, Workers | env flags / bundler / `tsconfig` |
-| **TSX/React** | `prettier` | 2 spaces | `PascalCase` components; `camelCase` props/utils | as TypeScript + React error boundaries | async; render concurrency | env / feature flags |
-| **Python** | `black` | 4 spaces | `snake_case` funcs/vars, `CamelCase` classes, `UPPER_SNAKE` consts | exceptions; custom exceptions; no `except: pass` | `asyncio` / `threading` | env flags, `TYPE_CHECKING` |
-| **C#/.NET** | `dotnet format` / `csharpier` | 4 spaces | `PascalCase` types/methods/props, `camelCase` locals, `_camelCase` private | exceptions; `Result`; `async Task` | `async`/`await`, `lock`, TPL | `#if` / build props |
-| **Swift** | `swift-format` | 4 spaces | `lowerCamelCase` funcs/vars, `UpperCamelCase` types | `do`/`catch`, `Result`, optionals (no force-unwrap) | GCD / actors | `#if canImport` / build config |
-| **PHP** | `php-cs-fixer` / `pint` | 4 spaces (PSR-12) | `snake_case`/`camelCase` (framework), `CamelCase` classes | exceptions; nullable; strict types | — | composer / env |
-| **Ruby** | `rubocop` | 2 spaces | `snake_case`, `CamelCase` classes/modules, `SCREAMING` consts | exceptions; `rescue`/`ensure` | threads | — |
-| **Dart** | `dart format` | 2 spaces | `lowerCamelCase`, `PascalCase` types, `SCREAMING` consts | exceptions; `Future`/`Stream`; sealed | isolates, `async`/`await` | compile-time / build |
-| **Scala** | `scalafmt` | 2 spaces | `lowerCamelCase`, `UpperCamelCase` types, `UPPER_SNAKE` consts | `Try`/`Either`/`Option`; no exceptions for flow | futures / actors | build.sbt / cfg |
-| **Zig** | `zig fmt` | 4 spaces | `snake_case`, `CamelCase` types, `SCREAMING` consts | error unions (`!T`), explicit handling | `std.Thread`, `std.atomic` | compile-time `comptime` |
+| Language | Doc | Formatter | Indent |
+|----------|-----|-----------|--------|
+| C | [`data/languages/c.md`](data/languages/c.md) | `clang-format` | Tabs (8) |
+| C++ | [`data/languages/cpp.md`](data/languages/cpp.md) | `clang-format` | 2–4 spaces |
+| Rust | [`data/languages/rust.md`](data/languages/rust.md) | `rustfmt` | 4 spaces |
+| Go | [`data/languages/go.md`](data/languages/go.md) | `gofmt` | Tabs (8) |
+| Java | [`data/languages/java.md`](data/languages/java.md) | `google-java-format` | 4 spaces |
+| Kotlin | [`data/languages/kotlin.md`](data/languages/kotlin.md) | `ktlint` | 4 spaces |
+| JavaScript | [`data/languages/js.md`](data/languages/js.md) | `prettier` | 2 spaces |
+| TypeScript | [`data/languages/ts.md`](data/languages/ts.md) | `prettier` | 2 spaces |
+| TSX/React | [`data/languages/tsx.md`](data/languages/tsx.md) | `prettier` | 2 spaces |
+| Python | [`data/languages/python.md`](data/languages/python.md) | `black` | 4 spaces |
+| C#/.NET | [`data/languages/csharp.md`](data/languages/csharp.md) | `dotnet format` | 4 spaces |
+| Swift | [`data/languages/swift.md`](data/languages/swift.md) | `swift-format` | 4 spaces |
+| PHP | [`data/languages/php.md`](data/languages/php.md) | `php-cs-fixer`/`pint` | 4 spaces |
+| Ruby | [`data/languages/ruby.md`](data/languages/ruby.md) | `rubocop` | 2 spaces |
+| Dart | [`data/languages/dart.md`](data/languages/dart.md) | `dart format` | 2 spaces |
+| Scala | [`data/languages/scala.md`](data/languages/scala.md) | `scalafmt` | 2 spaces |
+| Zig | [`data/languages/zig.md`](data/languages/zig.md) | `zig fmt` | 4 spaces |
 
 ### Cross-cutting guidance per family
 
