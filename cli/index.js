@@ -135,7 +135,7 @@ function remove(dest) {
 
 function cmdUpdate() {
   const npm = process.platform === "win32" ? "npm.cmd" : "npm";
-  const where = "@29anan29/coding-standards-cli@latest";
+  const where = "coding-standards-cli@latest";
   console.log(`Updating ${prog} from npm (${where}) ...`);
   const r = spawnSync(npm, ["install", "-g", where], { stdio: "inherit", shell: process.platform === "win32" });
   if (r.status === 0) {

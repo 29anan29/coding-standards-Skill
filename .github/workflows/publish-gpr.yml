@@ -23,11 +23,10 @@ jobs:
           node-version: 20
           registry-url: https://registry.npmjs.org
 
-      - name: Publish scoped package to npm
+      - name: Publish to npm (unscoped name)
         run: |
           cd cli
-          # npm allows scoped packages; keep the same name on both registries.
-          node -e "const fs=require('fs');const p=JSON.parse(fs.readFileSync('package.json'));p.name='@29anan29/coding-standards-cli';fs.writeFileSync('package.json',JSON.stringify(p,null,2)+'\n')"
+          # npm publishes the original unscoped name directly.
           npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

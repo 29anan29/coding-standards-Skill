@@ -7,11 +7,12 @@ Python, C#/.NET, Swift, PHP, Ruby, Dart, Scala, and Zig.
 
 ## Install
 
-The package `@29anan29/coding-standards-cli` is published to **both** `registry.npmjs.org`
-(no token needed) and GitHub Packages.
+The package `coding-standards-cli` is published to **`registry.npmjs.org`** (no
+token needed) and, under the scoped name `@29anan29/coding-standards-cli`, to
+GitHub Packages.
 
 ```bash
-npm install -g @29anan29/coding-standards-cli
+npm install -g coding-standards-cli
 ```
 
 ## Usage
@@ -47,7 +48,7 @@ standards update                   # update this CLI from npm
 standards help                     # show help
 
 # Without global install, via npx
-npx @29anan29/coding-standards-cli init claude
+npx coding-standards-cli init claude
 ```
 
 `--ai <tool>` is accepted as a readable alias (`standards init --ai claude`).
