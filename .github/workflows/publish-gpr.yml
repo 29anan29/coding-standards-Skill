@@ -1,0 +1,34 @@
+name: Publish to GitHub Packages
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish-gpr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://npm.pkg.github.com
+          scope: "@29anan29"
+
+      - name: Publish scoped package to GitHub Packages
+        run: |
+          cd cli
+          # GitHub Packages requires a scoped package name; npmjs.org keeps the
+          # unscoped one published separately.
+          node -e "const fs=require('fs');const p=JSON.parse(fs.readFileSync('package.json'));p.name='@29anan29/coding-standards-cli';fs.writeFileSync('package.json',JSON.stringify(p,null,2)+'\\n')"
+          npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -42,6 +42,16 @@ option.
 > `.agents/skills/` — `coding-standards init agents` covers the portable
 > standard shared by many tools.
 
+**GitHub Packages**: also published for this repository at
+`@29anan29/coding-standards-cli` (see the
+[Package registry](https://github.com/users/29anan29/packages?repo_name=coding-standards-Skill));
+installing from it requires a GitHub token with `read:packages`.
+
+Cross-platform note: `coding-standards init <tool> --global` installs into your
+user skill directory, resolved per platform (Linux `/home/<you>`,
+macOS `/Users/<you>`, Windows `C:\Users\<you>`). Skills live under
+`~/.<tool>/skills` and are **never** installed under `~/.config`.
+
 ## Manual install
 
 Drop the `coding-standards/` folder into your assistant’s skill directory:

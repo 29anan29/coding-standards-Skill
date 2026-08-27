@@ -63,6 +63,20 @@ coding-standards/
 
 No dependencies, no network calls during installation.
 
+## Install from GitHub Packages
+
+The same CLI is also published to GitHub Packages (package registry > npm) for
+the `coding-standards-Skill` repository as `@29anan29/coding-standards-cli`.
+Requires a GitHub token with `read:packages` (or a `.npmrc` scoping the registry):
+
+```bash
+# ~/.npmrc
+# @29anan29:registry=https://npm.pkg.github.com
+# //npm.pkg.github.com/:_authToken=GH_TOKEN_WITH_READ_PACKAGES
+
+npm install -g "@29anan29/coding-standards-cli"
+```
+
 ## Supported locations
 
 `~` always means your home directory, resolved per platform: Linux

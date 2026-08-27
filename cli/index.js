@@ -57,8 +57,9 @@ function targetDir(tool, isGlobal) {
   const cfg = TOOLS[tool];
   const rel = isGlobal ? cfg.global : cfg.local;
   if (isGlobal && !cfg.global) {
-    // fall back to a generic global location under the home dir
-    return path.join(home, ".config", cfg.local);
+    // Fall back to a generic global location under the home directory.
+    // Never use ~/.config — tools store skills under their own ~/.<tool> dirs.
+    return path.join(home, rel);
   }
   return isGlobal ? path.join(home, rel) : path.resolve(rel);
 }
