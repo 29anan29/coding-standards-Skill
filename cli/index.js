@@ -7,6 +7,7 @@
 // Trae, Continue, Gemini CLI, and the generic .agents standard).
 
 const fs = require("fs");
+const os = require("os");
 const path = require("path");
 
 const PKG = require("./package.json");
@@ -18,22 +19,25 @@ if (!fs.existsSync(path.join(SKILL_DIR, "SKILL.md"))) {
   process.exit(1);
 }
 
-// home relative -> default global dir (used when a tool has no specific one)
-const HOME = (process.env.HOME || process.env.USERPROFILE || "");
+// Cross-platform home directory:
+//   Windows    C:\Users\<name>
+//   macOS      /Users/<name>
+//   Linux      /home/<name>
+const home = os.homedir();
 
 // tool -> { local, global } target directory (relative paths, appended under cwd/home)
 const TOOLS = {
-  claude:     { local: path.join(".claude", "skills"),       global: ".claude/skills" },
-  claudecode: { local: path.join(".claude", "skills"),       global: ".claude/skills" },
-  opencode:   { local: path.join(".opencode", "skills"),   global: ".config/opencode/skills" },
-  codex:      { local: path.join(".codex", "skills"),        global: ".codex/skills" },
-  cursor:     { local: path.join(".cursor", "skills"),       global: ".cursor/skills" },
-  windsurf:   { local: path.join(".windsurf", "skills"),     global: ".windsurf/skills" },
-  trae:       { local: path.join(".trae", "skills"),         global: ".trae/skills" },
-  continue:   { local: path.join(".continue", "skills"),     global: ".continue/skills" },
-  gemini:     { local: path.join(".gemini", "skills"),       global: ".gemini/skills" },
-  agents:     { local: path.join(".agents", "skills"),       global: ".agents/skills" },
-  universal:  { local: path.join(".agents", "skills"),       global: ".agents/skills" },
+  claude:     { local: path.join(".claude", "skills"),   global: ".claude/skills" },
+  claudecode: { local: path.join(".claude", "skills"),   global: ".claude/skills" },
+  opencode:   { local: path.join(".opencode", "skills"), global: ".opencode/skills" },
+  codex:      { local: path.join(".codex", "skills"),    global: ".codex/skills" },
+  cursor:     { local: path.join(".cursor", "skills"),   global: ".cursor/skills" },
+  windsurf:   { local: path.join(".windsurf", "skills"), global: ".windsurf/skills" },
+  trae:       { local: path.join(".trae", "skills"),     global: ".trae/skills" },
+  continue:   { local: path.join(".continue", "skills"), global: ".continue/skills" },
+  gemini:     { local: path.join(".gemini", "skills"),   global: ".gemini/skills" },
+  agents:     { local: path.join(".agents", "skills"),   global: ".agents/skills" },
+  universal:  { local: path.join(".agents", "skills"),   global: ".agents/skills" },
 };
 
 // --ai all expands to every distinct tool (local targets, unless --global)
@@ -53,10 +57,10 @@ function targetDir(tool, isGlobal) {
   const cfg = TOOLS[tool];
   const rel = isGlobal ? cfg.global : cfg.local;
   if (isGlobal && !cfg.global) {
-    // fall back to a generic global location under home config
-    return path.join(HOME, ".config", cfg.local);
+    // fall back to a generic global location under the home dir
+    return path.join(home, ".config", cfg.local);
   }
-  return isGlobal ? path.join(HOME, rel) : path.resolve(rel);
+  return isGlobal ? path.join(home, rel) : path.resolve(rel);
 }
 
 function usage() {

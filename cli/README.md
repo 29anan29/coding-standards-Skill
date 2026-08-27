@@ -65,10 +65,13 @@ No dependencies, no network calls during installation.
 
 ## Supported locations
 
+`~` always means your home directory, resolved per platform: Linux
+`/home/<you>`, macOS `/Users/<you>`, Windows `C:\Users\<you>`.
+
 | Tool | Project-local | Global |
 |------|---------------|--------|
 | Claude Code | `.claude/skills/` | `~/.claude/skills/` |
-| OpenCode | `.opencode/skills/` | `~/.config/opencode/skills/` |
+| OpenCode | `.opencode/skills/` | `~/.opencode/skills/` |
 | Codex CLI | `.codex/skills/` | `~/.codex/skills/` |
 | Cursor | `.cursor/skills/` | `~/.cursor/skills/` |
 | Windsurf | `.windsurf/skills/` | `~/.windsurf/skills/` |
