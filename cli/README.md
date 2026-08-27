@@ -68,7 +68,7 @@ No dependencies, no network calls during installation.
 | Tool | Project-local | Global |
 |------|---------------|--------|
 | Claude Code | `.claude/skills/` | `~/.claude/skills/` |
-| OpenCode | `.opencode/skill/` | `~/.config/opencode/skill/` |
+| OpenCode | `.opencode/skills/` | `~/.config/opencode/skills/` |
 | Codex CLI | `.codex/skills/` | `~/.codex/skills/` |
 | Cursor | `.cursor/skills/` | `~/.cursor/skills/` |
 | Windsurf | `.windsurf/skills/` | `~/.windsurf/skills/` |

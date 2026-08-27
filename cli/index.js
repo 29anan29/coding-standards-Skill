@@ -25,7 +25,7 @@ const HOME = (process.env.HOME || process.env.USERPROFILE || "");
 const TOOLS = {
   claude:     { local: path.join(".claude", "skills"),       global: ".claude/skills" },
   claudecode: { local: path.join(".claude", "skills"),       global: ".claude/skills" },
-  opencode:   { local: path.join(".opencode", "skill"),      global: ".config/opencode/skill" },
+  opencode:   { local: path.join(".opencode", "skills"),   global: ".config/opencode/skills" },
   codex:      { local: path.join(".codex", "skills"),        global: ".codex/skills" },
   cursor:     { local: path.join(".cursor", "skills"),       global: ".cursor/skills" },
   windsurf:   { local: path.join(".windsurf", "skills"),     global: ".windsurf/skills" },
@@ -126,6 +126,26 @@ function run() {
   // init (default command)
   if (!opts.tool) { usage(); process.exit(2); }
   const targets = expand(opts.tool).map((t) => [t, path.join(targetDir(normalizeTool(t), opts.global), SKILL_NAME)]);
+
+  // Guard: a project-local install from inside a skill folder would nest the
+  // skill into its own subtree. Detect and warn with the correct alternative.
+  if (!opts.global) {
+    const cwd = process.cwd();
+    const insideSkillDir =
+      path.basename(cwd) === SKILL_NAME || fs.existsSync(path.join(cwd, "SKILL.md"));
+    const nestsIntoSource = targets.some(([, d]) => {
+      const abs = path.resolve(d);
+      return abs === SKILL_DIR || abs.startsWith(SKILL_DIR + path.sep);
+    });
+    if (insideSkillDir || nestsIntoSource) {
+      console.warn(
+        "note: you are inside a skill directory; project-local init would nest " +
+          SKILL_NAME + " into itself.\n      Run from your project root, or use " +
+          "--global to install into your user-level skill directory."
+      );
+    }
+  }
+
   for (const [name, dest] of targets) {
     if (fs.existsSync(dest) && !opts.force) {
       console.log("skip (exists, use --force): " + name + " -> " + dest);

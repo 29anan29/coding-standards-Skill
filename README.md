@@ -49,7 +49,7 @@ Drop the `coding-standards/` folder into your assistant’s skill directory:
 | Tool | Skill directory |
 |------|-----------------|
 | Claude Code | `.claude/skills/coding-standards/` |
-| OpenCode | `.opencode/skill/coding-standards/` |
+| OpenCode | `.opencode/skills/coding-standards/` |
 | Codex CLI | `.codex/skills/coding-standards/` |
 | Cursor | `.cursor/skills/coding-standards/` |
 | Windsurf | `.windsurf/skills/coding-standards/` |
