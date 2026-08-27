@@ -1,0 +1,39 @@
+{
+  "name": "coding-standards-cli",
+  "version": "1.0.0",
+  "description": "Install the cross-language engineering coding-standards AI skill into Claude Code, OpenCode, Codex CLI, Cursor, Windsurf, Trae, Continue, Gemini CLI, or the .agents standard.",
+  "license": "MIT",
+  "type": "commonjs",
+  "main": "index.js",
+  "bin": {
+    "coding-standards": "index.js"
+  },
+  "files": [
+    "index.js",
+    "skill/coding-standards/SKILL.md",
+    "skill/coding-standards/data",
+    "skill/coding-standards/scripts"
+  ],
+  "engines": {
+    "node": ">=16.7"
+  },
+  "keywords": [
+    "skill",
+    "coding-standards",
+    "claude-code",
+    "opencode",
+    "codex",
+    "agent"
+  ],
+  "scripts": {
+    "test": "node -e \"require('./index.js')\" --help >/dev/null 2>&1 && echo ok"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/29anan29/coding-standards-Skill.git"
+  },
+  "bugs": {
+    "url": "https://github.com/29anan29/coding-standards-Skill/issues"
+  },
+  "homepage": "https://github.com/29anan29/coding-standards-Skill#readme"
+}
