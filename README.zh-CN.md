@@ -21,16 +21,21 @@
 ```bash
 npm install -g coding-standards-cli
 cd /path/to/your/project
-coding-standards init claude      # Claude Code
-coding-standards init opencode    # OpenCode
-coding-standards init codex       # Codex CLI
-coding-standards init all         # 安装到所有支持的工具
+standards init claude      # Claude Code
+standards init opencode    # OpenCode
+standards init codex       # Codex CLI
+standards init all         # 安装到所有支持的工具
+standards global claude    # 或：全局安装到 ~/.claude/skills
+standards update           # 从 npm 更新本 CLI
+standards help             # 显示帮助
 ```
 
-每种工具与 `--global` 选项详见 [`cli/README.md`](cli/README.md)。
+`standards` 与 `coding-standards` 两个命令名等价。
+每种工具、`--global` 选项及 `list`/`uninstall`/`update` 命令详见
+[`cli/README.md`](cli/README.md)。
 
 > 提示：OpenCode、Codex、Cursor、Windsurf、Trae 也支持
-> `.agents/skills/` —— `coding-standards init agents` 可覆盖这套可移植标准。
+> `.agents/skills/` —— `standards init agents` 可覆盖这套可移植标准。
 
 ## 手动安装
 

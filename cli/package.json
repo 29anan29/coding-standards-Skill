@@ -1,12 +1,13 @@
 {
   "name": "coding-standards-cli",
-  "version": "1.3.3",
+  "version": "1.4.0",
   "description": "Install the cross-language engineering coding-standards AI skill into Claude Code, OpenCode, Codex CLI, Cursor, Windsurf, Trae, Continue, Gemini CLI, or the .agents standard.",
   "license": "MIT",
   "type": "commonjs",
   "main": "index.js",
   "bin": {
-    "coding-standards": "index.js"
+    "coding-standards": "index.js",
+    "standards": "index.js"
   },
   "files": [
     "index.js",
@@ -30,7 +31,7 @@
     "agent"
   ],
   "scripts": {
-    "test": "node -e \"require('./index.js')\" --help >/dev/null 2>&1 && echo ok"
+    "test": "node index.js --version >/dev/null 2>&1 && node index.js help >/dev/null 2>&1 && node index.js list >/dev/null 2>&1 && echo ok"
   },
   "repository": {
     "type": "git",

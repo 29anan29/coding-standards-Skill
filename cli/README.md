@@ -13,31 +13,42 @@ npm install -g coding-standards-cli
 
 ## Usage
 
+The binary is available under two names — `standards` (shorthand) and
+`coding-standards` (alias); both are equivalent.
+
 ```bash
 # Project-local install (recommended): run inside your project
 cd /path/to/project
-coding-standards init claude      # Claude Code
-coding-standards init opencode    # OpenCode
-coding-standards init codex       # Codex CLI
-coding-standards init cursor      # Cursor
-coding-standards init windsurf    # Windsurf
-coding-standards init trae        # Trae
-coding-standards init continue    # Continue
-coding-standards init gemini      # Gemini CLI
-coding-standards init agents      # Generic .agents/skills/ standard
-coding-standards init all         # Install into every supported tool
+standards init claude      # Claude Code
+standards init opencode    # OpenCode
+standards init codex       # Codex CLI
+standards init cursor      # Cursor
+standards init windsurf    # Windsurf
+standards init trae        # Trae
+standards init continue    # Continue
+standards init gemini      # Gemini CLI
+standards init agents      # Generic .agents/skills/ standard
+standards init all         # Install into every supported tool
+
+# Global install (ambiguous-free): available to all of that tool's projects
+standards global claude
+standards global opencode codex   # multiple tools at once
+
+# Or use the --global flag
+standards init claude --global
+
+# Manage
+standards list                     # list supported tools
+standards uninstall claude --global
+standards update                   # update this CLI from npm
+standards help                     # show help
 
 # Without global install, via npx
 npx coding-standards-cli init claude
 ```
 
-`--ai <tool>` is accepted as a readable alias (`init --ai claude`).
-
-Global install (available to all of that tool’s projects):
-
-```bash
-coding-standards init claude --global
-```
+`--ai <tool>` is accepted as a readable alias (`standards init --ai claude`).
+`--force` overwrites an existing install.
 
 Other commands:
 

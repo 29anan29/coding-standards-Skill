@@ -29,17 +29,21 @@ assistant’s skill directory:
 ```bash
 npm install -g coding-standards-cli
 cd /path/to/your/project
-coding-standards init claude      # Claude Code
-coding-standards init opencode    # OpenCode
-coding-standards init codex       # Codex CLI
-coding-standards init all         # All supported tools
+standards init claude      # Claude Code
+standards init opencode    # OpenCode
+standards init codex       # Codex CLI
+standards init all         # All supported tools
+standards global claude    # or: install globally into ~/.claude/skills
+standards update           # update this CLI from npm
+standards help             # show help
 ```
 
-See [`cli/README.md`](cli/README.md) for every supported tool and the `--global`
-option.
+Two binary names are equivalent: `standards` and `coding-standards`.
+See [`cli/README.md`](cli/README.md) for every supported tool, the `--global`
+option, and the `list`/`uninstall`/`update` commands.
 
 > Tip: OpenCode, Codex, Cursor, Windsurf, Trae also read
-> `.agents/skills/` — `coding-standards init agents` covers the portable
+> `.agents/skills/` — `standards init agents` covers the portable
 > standard shared by many tools.
 
 **GitHub Packages**: also published for this repository at
@@ -47,10 +51,11 @@ option.
 [Package registry](https://github.com/users/29anan29/packages?repo_name=coding-standards-Skill));
 installing from it requires a GitHub token with `read:packages`.
 
-Cross-platform note: `coding-standards init <tool> --global` installs into your
-user skill directory, resolved per platform (Linux `/home/<you>`,
-macOS `/Users/<you>`, Windows `C:\Users\<you>`). Skills live under
-`~/.<tool>/skills` and are **never** installed under `~/.config`.
+Cross-platform note: `standards global <tool>` (or `standards init <tool>
+--global`) installs into your user skill directory, resolved per platform
+(Linux `/home/<you>`, macOS `/Users/<you>`, Windows `C:\Users\<you>`). Skills
+live under `~/.<tool>/skills` and are **never** installed under `~/.config` —
+for **every** supported tool, not just OpenCode.
 
 ## Manual install
 
