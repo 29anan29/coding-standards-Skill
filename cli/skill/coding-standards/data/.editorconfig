@@ -8,7 +8,7 @@ insert_final_newline = true
 trim_trailing_whitespace = true
 end_of_line = lf
 
-[*.{c,h,cpp,hpp,cc}]
+[*.{c,h,cpp,hpp,cc,cxx}]
 indent_style = tab
 indent_size = 8
 
@@ -20,7 +20,39 @@ indent_size = 8
 indent_style = space
 indent_size = 4
 
-[*.{json,yml,yaml,js,ts,md}]
+[*.zig]
+indent_style = space
+indent_size = 4
+
+[*.{java,kt,kts}]
+indent_style = space
+indent_size = 4
+
+[*.cs]
+indent_style = space
+indent_size = 4
+
+[*.swift]
+indent_style = space
+indent_size = 4
+
+[*.php]
+indent_style = space
+indent_size = 4
+
+[*.py]
+indent_style = space
+indent_size = 4
+
+[*.{js,jsx,ts,tsx}]
+indent_style = space
+indent_size = 2
+
+[*.{rb,scala,dart}]
+indent_style = space
+indent_size = 2
+
+[*.{json,yml,yaml,js,ts,md,html,css}]
 indent_style = space
 indent_size = 2
 

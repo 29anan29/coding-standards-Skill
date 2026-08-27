@@ -2,7 +2,8 @@
 
 Installs the **coding-standards** AI skill into your AI coding assistant’s skill
 directory. The skill encodes a cross-language engineering coding standard
-(C, Rust, Go, and more).
+covering C, C++, Rust, Go, Java, Kotlin, JavaScript, TypeScript, TSX/React,
+Python, C#/.NET, Swift, PHP, Ruby, Dart, Scala, and Zig.
 
 ## Install
 
@@ -57,7 +58,7 @@ Copied under the tool’s skill directory as `coding-standards/`:
 coding-standards/
 ├── SKILL.md    # the skill instructions (trigger conditions + standard)
 ├── data/       # .editorconfig, clang-format, rustfmt.toml
-└── scripts/    # apply-format.sh (gofmt / rustfmt / clang-format wrapper)
+└── scripts/    # apply-format.sh (per-language formatter wrapper)
 ```
 
 No dependencies, no network calls during installation.

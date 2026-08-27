@@ -2,13 +2,14 @@
 
 A cross-language engineering coding standard packaged as an **AI skill**. It
 guides AI coding agents to produce clean, consistent, maintainable, idiomatic
-code when writing, reviewing, or refactoring C, Rust, Go, and related
-languages.
+code when writing, reviewing, or refactoring C, C++, Rust, Go, Java, Kotlin,
+JavaScript, TypeScript, TSX/React, Python, C#/.NET, Swift, PHP, Ruby, Dart,
+Scala, and Zig.
 
 ## Highlights
 
 - **Language-agnostic** rules mapped to per-language idioms
-  (C / Rust / Go), plus a quick-reference table.
+  (17 languages), plus a quick-reference table.
 - **Reviewer-friendly**: strict, consistent, actionable guidance.
 - **Hard vs. soft** rule prioritization so agents know what is mandatory.
 - **Deliverable checklist** to verify output before submission.
@@ -66,7 +67,8 @@ macros · 13. Logging · 14. Performance · 15. Return values & error handling �
 16. Booleans · 17. Reuse standard library · 18. Editor/metadata hygiene ·
 19. Low-level/unsafe constructs · 20. Feature gating · 21. Fail safely
 
-Ends with a **Deliverable Checklist** and a **Language Quick Reference**.
+Ends with a **Deliverable Checklist** and a **Language Conventions** table
+covering all 17 languages.
 
 ## Repository layout
 
