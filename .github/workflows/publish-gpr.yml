@@ -26,8 +26,12 @@ jobs:
       - name: Publish to npm (unscoped name)
         run: |
           cd cli
-          # npm publishes the original unscoped name directly.
-          npm publish
+          # Idempotent: skip if this exact version already exists on npm.
+          if npm view "coding-standards-cli@$(node -p "require('./package.json').version")" >/dev/null 2>&1; then
+            echo "Version already published to npm; skipping."
+          else
+            npm publish
+          fi
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
