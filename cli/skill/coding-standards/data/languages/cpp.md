@@ -17,5 +17,10 @@
 - Use the C++ standard library algorithms/containers instead of hand-rolled
   loops where idiomatic.
 - Keep `unsafe`-style reinterpret/low-level casts minimal and documented.
+- **Check pointers/nullable references before dereferencing** (`std::unique_ptr`,
+  raw pointers, `std::optional`): validate on entry and right after allocation;
+  fail fast instead of dereferencing the empty/null case.
 - Group `#include`s clearly; avoid circular dependency cycles.
 - Operator/user-visible strings must not be split across lines.
+- **File header (lines 1-2):** a short comment stating the file's purpose, plus
+  any required license/`SPDX` tag.

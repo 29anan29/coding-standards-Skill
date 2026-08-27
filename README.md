@@ -1,5 +1,7 @@
 # coding-standards
 
+> **English** · [中文](README.zh-CN.md)
+
 A cross-language engineering coding standard packaged as an **AI skill**. It
 guides AI coding agents to produce clean, consistent, maintainable, idiomatic
 code when writing, reviewing, or refactoring C, C++, Rust, Go, Java, Kotlin,
@@ -13,6 +15,7 @@ Scala, and Zig.
 - **Reviewer-friendly**: strict, consistent, actionable guidance.
 - **Hard vs. soft** rule prioritization so agents know what is mandatory.
 - **Deliverable checklist** to verify output before submission.
+- **Tools for AI agents** to format and self-check code (see below).
 
 The skill source lives at
 [`cli/skill/coding-standards/`](cli/skill/coding-standards/), containing
@@ -59,16 +62,35 @@ cp -r cli/skill/coding-standards .claude/skills/
 
 ## What the skill covers
 
-1. Indentation · 2. Line length & strings · 3. Braces & spacing · 4. Naming ·
-5. Type abstractions · 6. Functions & scope · 7. Centralized control flow /
-cleanup · 8. Comments · 9. Automated formatting · 10. Memory, ownership &
-resources · 11. Data structures & concurrency · 12. Constants, enums &
-macros · 13. Logging · 14. Performance · 15. Return values & error handling ·
+1. Indentation (tabs, 8 columns by default) · 2. Line length & strings ·
+3. Braces & spacing · 4. Naming (incl. explicit **variable naming rules** for
+locals/globals/constants) · 5. Type abstractions · 6. Functions & scope ·
+7. Centralized control flow / cleanup · 8. Comments (file header on lines 1-2,
+**block comments** over cohesive fragments, not line-by-line) ·
+9. Automated formatting · 10. Memory, ownership & resources ·
+11. Data structures & concurrency · 12. Constants, enums & macros ·
+13. Logging · 14. Performance · 15. Return values & error handling ·
 16. Booleans · 17. Reuse standard library · 18. Editor/metadata hygiene ·
-19. Low-level/unsafe constructs · 20. Feature gating · 21. Fail safely
+19. Low-level/unsafe constructs (incl. `NULL`-pointer checks in C/C++/Zig) ·
+20. Feature gating · 21. Fail safely
 
-Ends with a **Deliverable Checklist** and a **Language Conventions** table
-covering all 17 languages.
+Ends with a **Deliverable Checklist** and a **Language Conventions** index
+covering all 17 languages. Per-language details live in
+[`data/languages/`](cli/skill/coding-standards/data/languages/).
+
+## Tools for AI agents
+
+Bundled helper scripts the agent can run to enforce the standard:
+
+| Tool | Purpose |
+|------|---------|
+| `scripts/apply-format.sh` | Run the canonical formatter (`gofmt`, `rustfmt`, `clang-format`, `prettier`, `black`, …) on files/dirs. |
+| `scripts/check-style.sh` | Dependency-free style lint: trailing whitespace, over-long lines, mixed indentation, editor modelines, and missing file headers. |
+
+```bash
+sh scripts/apply-format.sh src/
+sh scripts/check-style.sh src/
+```
 
 ## Repository layout
 
@@ -79,10 +101,11 @@ covering all 17 languages.
 │   └── skill/
 │       └── coding-standards/    # the actual skill
 │           ├── SKILL.md
-│           ├── data/            # .editorconfig, clang-format, rustfmt.toml, languages/
-│           └── scripts/         # apply-format.sh
+│           ├── data/            # .editorconfig, clang-format, languages/
+│           └── scripts/         # apply-format.sh, check-style.sh
 ├── LICENSE
-└── README.md
+├── README.md                    # this file (English)
+└── README.zh-CN.md              # 简体中文
 ```
 
 ## License

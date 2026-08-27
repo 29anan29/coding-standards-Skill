@@ -23,9 +23,11 @@ takes precedence over the general guidance here for conflicting details.
 
 ## 1 Indentation
 
-- Use a consistent indentation unit — **one Tab or the language's idiomatic
-  setting**. Never mix tabs and spaces, and follow the official style when it
-  disagrees (see the [Language conventions](#language-conventions) table).
+- Use a consistent indentation unit. **Prefer tabs set to 8 columns by
+  default**; only a language whose official formatter mandates fewer spaces
+  (2/4) uses that instead. Never mix tabs and spaces, and follow the official
+  style when it disagrees (see the [Language conventions](#language-conventions)
+  table).
 - Rewrite code that nests more than ~3 levels deep; do not widen the
   indentation to accommodate nesting. Deep nesting is a design smell.
 - One statement per line. Do not put multiple assignments or statements on a
@@ -101,6 +103,26 @@ takes precedence over the general guidance here for conflicting details.
   prefer `{primary,main}/{secondary,replica}` and `denylist/allowlist`
   (or platform/language-preferred terms).
 
+### Variable naming rules
+
+- **Locals are short and meaningful.** Prefer `i`/`idx`/`j` for loop counters,
+  `tmp`/`buf`/`len` for throwaways — never opaque names like `x1`, `data`,
+  `thing`, or `foo`. Abbreviate only for obvious, tightly-scoped counters.
+- **One concept, one name.** Reuse the same identifier for the same concept;
+  do not introduce near-duplicates (`user`, `userObj`, `tempUser`).
+- **Encode units/roles only where it removes ambiguity**, e.g. `timeout_ms`,
+  `buf_len`, `rx`/`tx`, `off_begin`/`off_end`. Do **not** encode types
+  (Hungarian) — `strCount`, `arrUsers`, `intN` are banned.
+- **Scope scales name length.** A one-line local can be `i`; a widely-shared
+  global or public symbol must be descriptive (`count_active_users`, never
+  `cntusr`).
+- Match the language case convention (see the
+  [Language conventions](#language-conventions) index): `snake_case`,
+  `camelCase`, `CamelCase` types, `SCREAMING_SNAKE_CASE` constants.
+- Constants: `SCREAMING_SNAKE_CASE`; private/package symbols use `_x` or
+  `x` per language; booleans read as predicates (`is_open`, `has_lock`,
+  `*_present`).
+
 ## 5 Type Abstractions
 
 - Prefer explicit, self-describing types (e.g. `struct Account *a` over an
@@ -155,6 +177,32 @@ takes precedence over the general guidance here for conflicting details.
 - For public APIs, use the language/ecosystem's doc comment convention
   (Rust `///`, Go `//`, JS/TS `JSDoc`, Python docstrings, Java/Kotlin/C#/Swift
   `///`/`/** */`). Avoid boilerplate that merely repeats the signature.
+- **File header (lines 1-2).** Start every source file with a short comment
+  that states what the file is/does at a glance, so a reader knows its purpose
+  before reading code:
+
+```c
+	/*
+	 * matrix_ops.c — dense matrix multiply and LU factorization.
+	 */
+```
+
+  Put a required license tag (`SPDX-License-Identifier: …`) directly above or
+  below it as the project dictates.
+- **Comment in blocks, not line-by-line.** Explain a cohesive piece — a
+  function, a struct, an algorithm — with one multi-line comment placed above
+  it. Do not scatter isolated one-line asides through the body. Write several
+  lines explaining a fragment together, never one terse line per statement:
+
+```c
+	/*
+	 * Accumulate partial products into the accumulator row.
+	 * Offsets are scaled by 16 for fixed-point; see layout in
+	 * the struct below. Rows must already be zero-initialized.
+	 */
+	for (j = 0; j < k; j++)
+		acc[i * k + j] += a[i * lda] * b[j * ldb];
+```
 
 ## 9 Automated Formatting
 
@@ -289,6 +337,11 @@ takes precedence over the general guidance here for conflicting details.
   invariants on the enclosing item.
 - C/C++/Zig: prefer portable, well-reviewed code; extract low-level idioms
   into helper functions; document any inline assembly.
+- **Check pointers before every dereference** in C/C++/Zig. Validate `NULL` at
+  entry points, right after allocation, and before following external handles;
+  fail fast with a clear error/return code rather than dereferencing in a nil
+  or dangling state. Prefer functions that take pointers to already-validated
+  data internally and document the preconditions.
 - Java/Kotlin/Python/JS/TS: avoid `sun.misc.Unsafe`/`ctypes`/reflection hacks
   unless truly necessary.
 
@@ -330,20 +383,26 @@ Check every item before delivering code:
 - [ ] Consistent brace & spacing style (K&R statement blocks; symmetric braces
   when any branch is multi-statement; indentation grouping for Python).
 - [ ] Naming: short locals, descriptive globals/publics, language-native case
-  convention, no Hungarian, no `master/slave`/`blacklist` terms.
+  convention, one-concept-one-name, no Hungarian, no
+  `master/slave`/`blacklist` terms.
 - [ ] No opaque typedefs hiding directly-accessible types; explicit TS types
   (no `any`).
 - [ ] Functions short, single-purpose, ≤ ~5-10 locals; meaningful parameter
   names.
 - [ ] Cleanup centralized (`goto`/`defer`/RAII/`using`/`with`/`finally`) and
   released exactly once on all paths.
-- [ ] Comments state what/why, not how; idiomatic doc comments without
-  boilerplate.
+- [ ] **File header (lines 1-2)** states what the file is/does; license tag
+  present where required.
+- [ ] Comments state what/why, not how; **written in multi-line blocks** over
+  cohesive fragments (function/struct), not line-by-line; idiomatic doc
+  comments without boilerplate.
 - [ ] Formatter/linter pass (gofmt, rustfmt, clang-format, black, prettier,
   google-java-format, ktlint, dotnet format, swift-format, php-cs-fixer,
   rubocop, dart format, scalafmt, zig fmt); no formatting noise.
 - [ ] Memory/ownership/teardown correct on every path; shared state
   synchronized with a documented contract.
+- [ ] In C/C++/Zig: **pointers checked (`NULL`) before every dereference**;
+  entry points and allocation results validated; fail fast with a clear code.
 - [ ] Constants/enums/sealed types idiomatic; functions preferred over macros;
   multi-statement macros wrapped.
 - [ ] Logging: appropriate levels, concise, context-tagged; quiet happy path.
@@ -405,3 +464,12 @@ recommendations there — official formatters/guides still win on detail.
 The installable package is **`coding-standards-cli`** on npm. See
 [`cli/README.md`](../../cli/README.md) for installation into Claude Code,
 OpenCode, Codex CLI, Cursor, Windsurf, Trae, and the `.agents/skills` standard.
+
+### Bundled tools
+
+- `data/languages/<lang>.md` — per-language conventions (read the relevant one
+  before writing that language).
+- `scripts/apply-format.sh` — run the canonical formatter on files/dirs.
+- `scripts/check-style.sh` — dependency-free style lint (trailing whitespace,
+  over-long lines, mixed indentation, editor modelines, file headers); use it
+  to self-check before delivering code.
